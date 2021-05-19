@@ -1,10 +1,14 @@
-class PythonUtilities:
-    _public_methods = ['split_string']
-    _reg_progid_ = "PythonUtilities"
-    _reg_clsid_ = 1
-    def split_string(self,val, item=None):
-        if item!= None: item = str(item)
-        return str(val).split(item)
-#commit test
-import pythoncom
-print(pythoncom.CreateGuid())
+from win32com.client import Dispatch
+import os
+path = os.getcwd()
+filepath = path+'\\t.xlsx'
+
+
+xlApp = Dispatch("Excel.Application")
+xlApp.Visible = 1
+xlApp.Workbooks.Add(filepath)
+if xlApp.Workbooks('t1').Sheets('Sheet2').Cells(1,1).Value == 0:
+    xlApp.Workbooks('t1').Sheets('Sheet1').Cells(1,1).Interior.Color = 255
+
+
+
